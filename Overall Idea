@@ -1,0 +1,36 @@
+## Value at Risk (VaR):
+Value at Risk is a risk management metric used to estimate the potential loss in the value of a portfolio over a specific time frame and at a certain confidence level. In this code, VaR is calculated using the Monte Carlo method, simulating different scenarios to estimate the range of potential losses.
+
+## Portfolio:
+A portfolio is a collection of financial investments such as stocks, bonds, and other assets. Portfolios are constructed to achieve a balance between risk and potential return. Investors allocate their resources across different assets to diversify risk and optimize their returns.
+
+* In the context of data analysis and programming, "NAs" stand for "Not Available" or "Missing Values." They refer to the absence of data in certain cells of a dataset. Missing values can occur due to various reasons, such as data collection errors, system failures, or incomplete.
+
+* The code calculates the daily log returns of the adjusted closing prices of the stocks in the adj_close_df DataFrame.
+* adj_close_df contains the historical daily adjusted closing prices of different stocks.
+* adj_close_df/adj_close_df.shift(1) calculates the ratio of each day's adjusted closing price to the previous day's price. This essentially computes the daily return for each stock.
+* log_returns = log_returns.dropna():
+* The calculated log returns contain a row with missing values (NAs) in the first row.
+* Since the first row has no previous day's data for the calculation (because there is no data before the first day), the division results in NAs for the first row.
+* To ensure accurate analysis, the dropna() function is used to remove rows with missing values. In this case, it removes the first row with NAs caused by the calculation of daily returns.
+* By dropping the rows with missing values, the code ensures that the dataset used for analysis is complete and accurate. This is important because calculations involving incomplete or erroneous data could lead to inaccurate insights and conclusions.
+* In the context of the code, log returns are calculated from historical stock prices to represent the daily performance of each stock. These log returns are then used to estimate potential portfolio gains or losses through Monte Carlo simulations, which are an effective way to model various market scenarios. By using log returns in these simulations, the code aims to provide a more accurate understanding of the potential risks and rewards associated with the portfolio.
+
+1. Creating a Function for Expected Return:
+The function expected_return calculates the expected return of a portfolio based on historical log returns and assigned weights. The significance lies in understanding the potential average gain or loss that an investor can expect from holding a particular portfolio configuration. By incorporating the historical performance of each stock and their respective weights, this function provides an estimate of the portfolio's average performance over time. However, it's important to note that this calculation assumes that future returns will resemble past returns, which might not always hold true due to changing market conditions.
+
+2. Creating a Function for Portfolio Standard Deviation:
+The function standard_deviation calculates the standard deviation of a portfolio's returns. Standard deviation is a critical measure of risk. It quantifies the extent to which the returns of a portfolio deviate from their average (expected) return. By considering the covariance matrix (which incorporates correlations and volatilities) and the weights of individual stocks, this function helps investors assess the potential variability and volatility of their portfolio's returns. A higher standard deviation implies higher risk, and a lower standard deviation implies lower risk.
+
+3. Creating a Covariance Matrix:
+The covariance matrix summarizes the relationships between the log returns of different stocks in the portfolio. It's a central component for risk analysis. The matrix captures how stocks' returns move together—whether they tend to rise and fall in sync or move independently. This information is critical because it allows investors to understand how diversification impacts risk. If stocks are positively correlated, they may move in the same direction, potentially amplifying losses or gains. On the other hand, if stocks are negatively correlated or uncorrelated, their movements may offset each other, reducing overall portfolio risk.
+
+In essence, these three parts of the code are fundamental to evaluating and managing portfolio risk and return. They help investors make informed decisions about asset allocation, considering historical performance, risk levels, and correlations between assets. This information aids in constructing portfolios that align with investors' risk tolerance and financial goals.
+
+4. Portfolio_value: This represents the total value of the portfolio. In this case, it's set to $1,000,000 (1 million dollars). This is the initial investment amount in the portfolio.
+5. Weights: An array of weights assigned to each stock in the portfolio. Here, an equally weighted portfolio is created, meaning that each stock receives an equal allocation (20% in this case since there are 5 tickers).
+6. Portfolio_expected_return: This variable stores the expected return of the portfolio, calculated using the expected_return function you defined earlier. It takes the weights and log returns as inputs and computes the average expected return of the portfolio based on historical data.
+7. Portfolio_std_dev: This variable stores the standard deviation of the portfolio's returns, calculated using the standard_deviation function. It considers the covariance matrix and weights to estimate the portfolio's risk.
+8. Random_z_score(): This function generates a random Z-score from a standard normal distribution (mean 0, standard deviation 1). Z-scores help simulate various market conditions in Monte Carlo simulations.
+9. Days: This represents the number of days over which scenarios are simulated. In this case, it's set to 30 days, which is used for calculating potential gains or losses.
+* The scenario_gain_loss function calculates the potential gain or loss for a given scenario. It considers the portfolio's expected return, standard deviation, a random Z-score (using random_z_score()), and the specified number of days. This function models how the portfolio's value could change under different market conditions and is a core component for estimating Value at Risk (VaR)
