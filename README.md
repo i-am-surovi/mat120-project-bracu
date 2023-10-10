@@ -1,3 +1,6 @@
+# 🙋‍♂️ Support
+If you like this project, give it a ⭐ and share it with friends!
+
 # Here is the explanation of the project.......
 ## Value at risk (VaR):
 
